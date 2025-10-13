@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pipenv environment
+Pipfile.lock
+/.venv/
+.venv/
+.env/
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+db.sqlite3
+media/
+
+# Django migrations (optional, keep if you want to version them)
+*/migrations/*.py
+!*/migrations/__init__.py
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db

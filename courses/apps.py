@@ -1,0 +1,8 @@
+# this would make more sense as config.py instead of apps.py
+
+from django.apps import AppConfig
+
+
+class CoursesConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'courses'
