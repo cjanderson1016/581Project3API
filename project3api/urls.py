@@ -19,5 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('courses/', include("courses.urls")) # all urls beginning with 'courses/' are directed to the courses app
+    path('api/', include("courses.urls")) # all urls beginning with 'api/' are directed to the courses app
 ]
