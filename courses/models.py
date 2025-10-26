@@ -20,7 +20,7 @@ class Course(models.Model):
     # course attributes
     credits_min = models.PositiveIntegerField(default=0, max_length=1) # minimum number of credit hours (ex. "1")
     credits_max = models.PositiveIntegerField(default=0, max_length=1) # maximum number of credit hours (ex. "5")
-    seats_available = models.PositiveIntegerField(default=0, max_length=3) # seats available (up to three digit int)
+    seats_available = models.IntegerField(default=0, max_length=3) # seats available (up to three digit int) I changed this because some of the available seats register as -1? not sure why -Matthew
     total_enrolled = models.PositiveIntegerField(default=0, max_length=3) # total enrolled (up to three digit int)
     enroll_cap = models.PositiveIntegerField(default=0, max_length=3) # enroll cap (up to three digit int)
     # acad carrer -- unsure what this is referencing (it always seems to be UGDL) -- Should we add this field?
