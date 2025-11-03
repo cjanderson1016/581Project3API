@@ -1,11 +1,10 @@
-# schedules/urls.py
-from django.urls import path
-from .views import (
-    ScheduleListCreateAPIView,
-    ScheduleRetrieveUpdateDestroyAPIView
-)
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import ScheduleViewSet
+
+router = DefaultRouter()
+router.register(r'schedules', ScheduleViewSet, basename='schedule')
 
 urlpatterns = [
-    path('', ScheduleListCreateAPIView.as_view(), name='schedule-list-create'),
-    path('<int:pk>/', ScheduleRetrieveUpdateDestroyAPIView.as_view(), name='schedule-detail'),
+    path('', include(router.urls)),
 ]

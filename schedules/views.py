@@ -1,18 +1,12 @@
-from django.shortcuts import render
-
-# Create your views here.
-
-from rest_framework import generics
+from rest_framework import viewsets
 from .models import Schedule
 from .serializers import ScheduleSerializer
 
-# List all schedules / Create new schedule
-class ScheduleListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Schedule.objects.all()
-    serializer_class = ScheduleSerializer
-
-# Retrieve / Update / Delete a schedule
-class ScheduleRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+class ScheduleViewSet(viewsets.ModelViewSet):
+    """
+    A ViewSet for viewing and editing schedules.
+    Provides list, retrieve, create, update, and delete actions.
+    """
     queryset = Schedule.objects.all()
     serializer_class = ScheduleSerializer
 
