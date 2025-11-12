@@ -60,8 +60,9 @@ class Course(models.Model):
     
 
     def __str__(self):
-        return f"{self.subject} {self.course_number} - {self.title}"
-
+        return f"{self.subject} {self.course_number} - {self.title}{" " + self.topic if self.topic != 'nan' else ''} ({self.class_number})"
+        # Ex. EECS 138 - Introduction to Computing: Python (40523)
+        # The topic is only displayed when present ('nan' is how an empty excel cell is read by the importing program)
 
 #  ===== After making changes to the models =====
 
