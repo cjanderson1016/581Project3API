@@ -10,19 +10,19 @@ class Course(models.Model):
     
     # identify the course
     subject = models.CharField(max_length=100, blank=True) # the subject abbreviation the course belongs to (ex. EECS) -- can be expanded into its full name based on this abbreviation later if needec -- 2 to 4 chars of letters (can include an "&")
-    course_number = models.PositiveIntegerField(max_length=3)  # the course number (ex. 168) -- all fall between 001 and 999 and can be repeated across subjects
-    registrar_course_number = models.PositiveIntegerField(max_length=6) # seems to be a 6 digit number identifying the combination of subject and course number -- unsure of its exact use
+    course_number = models.PositiveIntegerField()  # the course number (ex. 168) -- all fall between 001 and 999 and can be repeated across subjects
+    registrar_course_number = models.PositiveIntegerField() # seems to be a 6 digit number identifying the combination of subject and course number -- unsure of its exact use
     title = models.CharField(max_length=100) # title of the course (ex. Programming I) 
     topic = models.CharField(max_length=100, blank=True) # some courses may have a topic (ex. Python) -- distinguishses "Special Topics:" courses (ex. Laser Engineering)
-    class_number = models.PositiveIntegerField(max_length=5, unique=True) # unique 5 digit identifier for each class that can be enrolled in (ex. 40523)
-    section_number = models.PositiveIntegerField(max_length=4) # 4 digits used to identify the different sections of the same class (ex. "1000" or "1100")
+    class_number = models.PositiveIntegerField(unique=True) # unique 5 digit identifier for each class that can be enrolled in (ex. 40523)
+    section_number = models.PositiveIntegerField() # 4 digits used to identify the different sections of the same class (ex. "1000" or "1100")
     
     # course attributes
-    credits_min = models.PositiveIntegerField(default=0, max_length=1) # minimum number of credit hours (ex. "1")
-    credits_max = models.PositiveIntegerField(default=0, max_length=1) # maximum number of credit hours (ex. "5")
-    seats_available = models.IntegerField(default=0, max_length=3) # seats available (up to three digit int) I changed this because some of the available seats register as -1? not sure why -Matthew
-    total_enrolled = models.PositiveIntegerField(default=0, max_length=3) # total enrolled (up to three digit int)
-    enroll_cap = models.PositiveIntegerField(default=0, max_length=3) # enroll cap (up to three digit int)
+    credits_min = models.PositiveIntegerField(default=0) # minimum number of credit hours (ex. "1")
+    credits_max = models.PositiveIntegerField(default=0) # maximum number of credit hours (ex. "5")
+    seats_available = models.IntegerField(default=0) # seats available (up to three digit int) I changed this because some of the available seats register as -1? not sure why -Matthew
+    total_enrolled = models.PositiveIntegerField(default=0) # total enrolled (up to three digit int)
+    enroll_cap = models.PositiveIntegerField(default=0) # enroll cap (up to three digit int)
     # acad carrer -- unsure what this is referencing (it always seems to be UGDL) -- Should we add this field?
     type = models.CharField(max_length=3) # component -- the three letter abbreviation for the "Type" of class (ex. "LEC", "LBN", "DIS", "IND", or "LAB")
     consent = models.CharField(max_length=100) # consent -- the type of consent needed to enroll in the course (ex. "None", "Department", or "Instructor")
