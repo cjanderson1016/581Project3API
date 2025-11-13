@@ -33,11 +33,13 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sessions',
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'courses',
     'schedules',
+    'users',
     'rest_framework',
     'corsheaders'
 ]
@@ -54,6 +56,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True  # simple for local dev
+
+AUTH_USER_MODEL = 'users.ScheduleUser' # Use the custom user model defined in /users/models.py
 
 ROOT_URLCONF = 'project3api.urls'
 
