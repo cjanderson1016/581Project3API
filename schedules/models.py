@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 
 # Schedule model
 class Schedule(models.Model):
     # Reference to the user who owns the schedule
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="schedules") # allow for NULL because User auth has not been implemented yet
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name="schedules") # allow for NULL because User auth has not been implemented yet
     # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="schedules") # post-user auth version
 
 
