@@ -6,7 +6,7 @@ from rest_framework.routers import DefaultRouter # import the Django REST Framew
 from .views import CourseViewSet
 
 router = DefaultRouter() # create an instance of the DefaultRouter class (from the Django REST Framework)
-router.register(r'courses', CourseViewSet) # handle the "api/courses/{insert route name here}" using the CourseViewSet defined in courses/views.py
+router.register(r'', CourseViewSet) # handle the "api/courses/{insert route name here}" using the CourseViewSet defined in courses/views.py
 
 # an array of URLPattern objects
 # URLconf module -- url configuration (needs to be imported into the main url configuration in project3api/urls.py)
