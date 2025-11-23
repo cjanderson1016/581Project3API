@@ -70,15 +70,19 @@ class LoginViewset(APIView):
 
 class GetCurrentUser(APIView):
     permission_classes = [permissions.IsAuthenticated]
-
     def get(self, request, *args, **kwargs):
-        current_user=request.user
-        return Response(
-            {
-                "id": current_user.id,
-                "email":current_user.email,
-                "full_name": current_user.full_name,
+        current_user = request.user
+        # Use serializer so the shape matches what the frontend expects (includes `schedule_ids`).
+        return Response(UserSerializer(current_user).data)
 
-            }
-        )
+    def patch(self, request, *args, **kwargs):
+        """Allow the authenticated user to partially update their own fields,
+        including `schedule_ids`.
+        """
+        user = request.user
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
 

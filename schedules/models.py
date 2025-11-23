@@ -17,8 +17,8 @@ class Schedule(models.Model):
 
 
     # Many-to-many relationship with Course
-    courses = models.ManyToManyField("courses.Course", related_name="schedules", blank=True)
-
+    selected_courses = models.ManyToManyField("courses.Course", related_name="schedules", blank=True) # all courses sections related to the courses selected
+    displayed_courses = models.ManyToManyField("courses.Course", related_name="displayed_in_schedules", blank=True) # the courses displayed when the schedule was saved
 
     # Tracking creation and modification times
     created_date = models.DateTimeField(auto_now_add=True) # save the date/time when the object is first created then never updates again

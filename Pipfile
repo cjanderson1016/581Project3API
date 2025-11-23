@@ -10,6 +10,8 @@ django-cors-headers = "*"
 pandas = "*"
 openpyxl = "*"
 django-filter = "*"
+django-rest-knox = "*"
+django-rest-passwordreset = "*"
 
 [dev-packages]
 

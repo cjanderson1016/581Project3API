@@ -43,5 +43,10 @@ class ScheduleUser(AbstractBaseUser, PermissionsMixin):
     full_name=models.CharField(max_length=200) # Default model only contains fields for first name or last name, not the full name.
     REQUIRED_FIELDS = ["password"]
 
+    # Store associated schedule IDs for quick lookup and association.
+    # Uses a JSON list of integers so SQLite (default dev DB) works without Postgres-specific fields.
+    # Named `schedule_ids` to avoid colliding with the reverse related-name `schedules` on Schedule.user
+    schedule_ids = models.JSONField(default=list, blank=True, help_text="List of schedule IDs owned by this user")
+
     objects = ScheduleUserManager()
 
