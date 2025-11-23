@@ -7,7 +7,26 @@ from rest_framework.response import Response
 from .serializers import *
 from .models import *
 
+from knox.models import AuthToken # type: ignore
+
 User = get_user_model() 
+
+class PasswordReset(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request):
+        email = request.data.get('email')
+        password = request.data.get('password')
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=400)
+
+        user.set_password(password)
+        user.save()
+
+        return Response({"success": "Password updated successfully"})
 
 
 # Class for registration of users
@@ -31,7 +50,8 @@ class RegisterViewset(viewsets.ModelViewSet):
 # Class to handle login
 class LoginViewset(APIView):
     permission_classes = [permissions.AllowAny]
-
+    serializer_class = LoginSerializer
+    
     # Extract out the email and password from the database
     def post(self, request, *args, **kwargs):
 
@@ -42,6 +62,23 @@ class LoginViewset(APIView):
         user = authenticate(request, email=email, password=password)
 
         if user:
-            return Response({'message': 'Login successful!'}, status=200) #Status 200 means OK
+            _, token=AuthToken.objects.create(user) # create a Token for the user in this session.
+            return Response({ "user": self.serializer_class(user).data, "token": token})
         else:
             return Response({'error': 'Invalid credentials'}, status=401) # Means invalid authentication
+        
+
+class GetCurrentUser(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        current_user=request.user
+        return Response(
+            {
+                "id": current_user.id,
+                "email":current_user.email,
+                "full_name": current_user.full_name,
+
+            }
+        )
+

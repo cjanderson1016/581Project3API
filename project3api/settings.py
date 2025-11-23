@@ -41,11 +41,14 @@ INSTALLED_APPS = [
     'schedules',
     'users',
     'rest_framework',
+    'knox',
+    'django_rest_passwordreset',
     'django_filters',
     'corsheaders'
 ]
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
     "DEFAULT_FILTER_BACKENDS": [
         "django_filters.rest_framework.DjangoFilterBackend",
         "rest_framework.filters.SearchFilter",
@@ -67,6 +70,8 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = True  # simple for local dev
 
 AUTH_USER_MODEL = 'users.ScheduleUser' # Use the custom user model defined in /users/models.py
+
+
 
 ROOT_URLCONF = 'project3api.urls'
 
