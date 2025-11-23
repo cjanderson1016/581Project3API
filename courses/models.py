@@ -11,8 +11,8 @@ class Course(models.Model):
     # muffin note, -- means i added blank = true, ---- means I got rid of blank = true
 
     # identify the course
-    subject = models.CharField(max_length=100, blank=True, null=True) # the subject abbreviation the course belongs to (ex. EECS) -- can be expanded into its full name based on this abbreviation later if needec -- 2 to 4 chars of letters (can include an "&")
-    course_number = models.PositiveIntegerField(blank=True, null=True)  #-- the course number (ex. 168) -- all fall between 001 and 999 and can be repeated across subjects
+    subject = models.CharField(max_length=4) # the subject abbreviation the course belongs to (ex. EECS) -- can be expanded into its full name based on this abbreviation later if needec -- 2 to 4 chars of letters (can include an "&")
+    course_number = models.PositiveIntegerField(max_length=3)  #-- the course number (ex. 168) -- all fall between 001 and 999 and can be repeated across subjects
     registrar_course_number = models.PositiveIntegerField(blank=True, null=True) #-- seems to be a 6 digit number identifying the combination of subject and course number -- unsure of its exact use
     title = models.CharField(max_length=100) # title of the course (ex. Programming I) 
     topic = models.CharField(max_length=100, blank=True, null=True) # some courses may have a topic (ex. Python) -- distinguishses "Special Topics:" courses (ex. Laser Engineering)
