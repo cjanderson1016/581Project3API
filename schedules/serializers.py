@@ -24,14 +24,22 @@ from courses.serializers import CourseSerializer  # For nested read-only display
 
 class ScheduleSerializer(serializers.ModelSerializer):
     # Nested read-only courses for display
-    courses = CourseSerializer(many=True, read_only=True)
-    
-    # For write operations: accept a list of course IDs
-    course_ids = serializers.PrimaryKeyRelatedField(
+    displayed_courses = CourseSerializer(many=True, read_only=True)
+    selected_courses = CourseSerializer(many=True, read_only=True)
+
+    # For write operations: accept lists of course IDs mapped to model fields
+    displayed_course_ids = serializers.PrimaryKeyRelatedField(
         many=True,
         queryset=Course.objects.all(),
         write_only=True,
-        source='courses'  # maps to the courses ManyToManyField
+        source='displayed_courses'
+    )
+
+    selected_course_ids = serializers.PrimaryKeyRelatedField(
+        many=True,
+        queryset=Course.objects.all(),
+        write_only=True,
+        source='selected_courses'
     )
 
     class Meta:
@@ -44,6 +52,8 @@ class ScheduleSerializer(serializers.ModelSerializer):
             "is_active",
             "created_date",
             "last_updated_date",
-            "courses",
-            "course_ids",  # write-only field for POST/PUT
+            "selected_courses",
+            "selected_course_ids",
+            "displayed_courses",
+            "displayed_course_ids",
         ]

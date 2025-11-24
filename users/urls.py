@@ -12,4 +12,6 @@ urlpatterns = [
     path('login/', LoginViewset.as_view(), name='login'),
     path('user/', GetCurrentUser.as_view(), name='user'),
     path('reset-pass/', PasswordReset.as_view(), name='reset-pass'),
+    path('update-profile/', UpdateProfileView.as_view(), name='update-profile'),
+    path('change-password/', ChangePasswordView.as_view(), name='change-password'),
 ]

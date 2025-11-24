@@ -70,16 +70,68 @@ class LoginViewset(APIView):
 
 class GetCurrentUser(APIView):
     permission_classes = [permissions.IsAuthenticated]
-
     def get(self, request, *args, **kwargs):
-        current_user=request.user
-        return Response(
-            {
-                "id": current_user.id,
-                "email":current_user.email,
-                "full_name": current_user.full_name,
-                "is_staff": current_user.is_staff,
-                "is_superuser": current_user.is_superuser,
-            }
-        )
+        current_user = request.user
+        # Use serializer so the shape matches what the frontend expects (includes `schedule_ids`).
+        return Response(UserSerializer(current_user).data)
+
+    def patch(self, request, *args, **kwargs):
+        """Allow the authenticated user to partially update their own fields,
+        including `schedule_ids`.
+        """
+        user = request.user
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+
+class UpdateProfileView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        full_name = request.data.get('full_name')
+
+        if not full_name or not full_name.strip():
+            return Response({"error": "Full name is required"}, status=400)
+
+        user = request.user
+        user.full_name = full_name.strip()
+        user.save()
+
+        return Response({
+            "id": user.id,
+            "email": user.email,
+            "full_name": user.full_name
+        })
+
+
+class ChangePasswordView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        current_password = request.data.get('current_password')
+        new_password = request.data.get('new_password')
+
+        if not current_password or not new_password:
+            return Response(
+                {"error": "Both current and new password are required"},
+                status=400
+            )
+
+        user = request.user
+
+        # Verify current password
+        if not user.check_password(current_password):
+            return Response(
+                {"error": "Current password is incorrect"},
+                status=400
+            )
+
+        # Set new password
+        user.set_password(new_password)
+        user.save()
+
+        return Response({"message": "Password updated successfully"})
 
