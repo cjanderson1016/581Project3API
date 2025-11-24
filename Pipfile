@@ -5,6 +5,13 @@ name = "pypi"
 
 [packages]
 django = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+pandas = "*"
+openpyxl = "*"
+django-filter = "*"
+django-rest-knox = "*"
+django-rest-passwordreset = "*"
 
 [dev-packages]
 

@@ -28,7 +28,7 @@ pipenv shell
 
 ### 4. Install dependencies
 
-pipenv install django
+pipenv install
 
 ### 5. Open the Project in VS Code
 
@@ -51,3 +51,10 @@ python manage.py runserver
 
 Your Django server will start at:
 http://127.0.0.1:8000/
+
+
+# To remove warnings about unapplied migrations, do the following:
+CTRL + C // stop the server if it is running
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
