@@ -1,3 +1,8 @@
+'''
+    File: courses/models.py
+    Description: Model for Course data
+'''
+
 from django.db import models
 
 # Create your models here.

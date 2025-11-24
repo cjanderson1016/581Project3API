@@ -1,3 +1,8 @@
+'''
+    File: schedules/views.py
+    Description: Views for Schedule model
+'''
+
 from rest_framework import viewsets
 from .models import Schedule
 from .serializers import ScheduleSerializer

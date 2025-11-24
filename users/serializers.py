@@ -1,3 +1,8 @@
+'''
+    File: users/serializers.py
+    Description: Serializers for User model and authentication
+'''
+
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .models import *

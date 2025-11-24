@@ -1,3 +1,8 @@
+'''
+    File: users/urls.py
+    Description: URLs for User app
+'''
+
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter

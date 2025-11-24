@@ -1,3 +1,8 @@
+'''
+    File: courses/serializers.py
+    Description: Serializer for Course model
+'''
+
 # Serializers convert between model instances and JSON to work with the frontend
 # Serializers define the API representation
 

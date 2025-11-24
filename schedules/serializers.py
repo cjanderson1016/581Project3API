@@ -1,4 +1,8 @@
-# schedules/serializers.py
+'''
+    File: schedules/serializers.py
+    Description: Serializer for Schedule model
+'''
+
 from rest_framework import serializers
 from .models import Schedule
 from courses.models import Course

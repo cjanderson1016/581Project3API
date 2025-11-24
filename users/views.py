@@ -1,3 +1,8 @@
+'''
+    File: users/views.py
+    Description: Views for User registration, login, and profile management
+'''
+
 from django.shortcuts import render
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework.views import APIView

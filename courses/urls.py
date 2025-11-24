@@ -1,3 +1,8 @@
+'''
+    File: courses/urls.py
+    Description: URLs for Course app
+'''
+
 # map urls to view functions
 
 from django.urls import path, include
