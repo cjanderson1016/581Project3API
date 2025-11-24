@@ -14,7 +14,7 @@ class LoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','full_name', 'email', 'password')
+        fields = ('id','full_name', 'email', 'password', 'is_staff', 'is_superuser')
         extra_keyword_args = {'password': {'write_only' : True}}
 
     # Hashes the user's password so they are not easily found in the database. Uses sha256, Django salts the hash automatically as well.

@@ -78,7 +78,8 @@ class GetCurrentUser(APIView):
                 "id": current_user.id,
                 "email":current_user.email,
                 "full_name": current_user.full_name,
-
+                "is_staff": current_user.is_staff,
+                "is_superuser": current_user.is_superuser,
             }
         )
 

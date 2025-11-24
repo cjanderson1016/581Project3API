@@ -37,7 +37,8 @@ class Course(models.Model):
     end_date = models.CharField(max_length=6,blank=True, null=True) #-- the day the course end in the format of MMM-DD (ex. "MAY-15")
     location = models.CharField(max_length=50,blank=True, null=True) #-- a shortened name for the campus/location where the course is offered (ex. "LAWRENCE" or "EDWARDS")
     room = models.CharField(max_length=50, blank=True, null=True) # the name of the room the course takes place in (ex. "EATN 2010") -- contains the abbreviation of the building in the name
-    uploaded_by = models.CharField(max_length=100) #This should be set to "admin" if its a public course, or whatever user uploaded it if it is private.
+    uploaded_by_user_id = models.PositiveIntegerField() #This should be set to "admin" if its a public course, or whatever user uploaded it if it is private.
+    is_public = models.BooleanField() # Whether or not the course is public
 
     # Optional attributes to add that are exported
     # room_cap = models.PositiveIntegerField(default=0, max_length=3) # the capacity of the room the course is in (up to three digit int)

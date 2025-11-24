@@ -49,7 +49,8 @@ class Command(BaseCommand): #Makes it so that you can call it as a command using
                     end_date=row['End date'],
                     location=row['Location'],
                     room=row['Room'],
-                    uploaded_by='Admin'
+                    uploaded_by_user_id=0,
+                    is_public=True,
                 )
                 print(course) # prints the course its adding. we can get rid of this, but i kinda like seeing everything being added
                 courses_to_create.append(course)
